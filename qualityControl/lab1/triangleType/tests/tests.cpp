@@ -12,6 +12,7 @@ TEST_CASE("case #1")
 	string message = "", a = "", b = "", c = "";
  
 	ifstream testCases("testCases.txt");
+	ofstream result("result.txt");
  
 	while (!testCases.eof())
 	{
@@ -19,7 +20,15 @@ TEST_CASE("case #1")
 		if (argumQuantity != 4)
 		{
 			testCases.seekg(1, ios::cur);
-			getline(testCases, message);
+			getline(testCases, message);		
+			if (checkNumberOfArguments(argumQuantity) == message)
+			{
+				result << "Successfull" << endl;
+			}
+			else
+			{
+				result << "Error" << endl;
+			}
 			CHECK((checkNumberOfArguments(argumQuantity) == message));
 		}
 		else
@@ -28,7 +37,15 @@ TEST_CASE("case #1")
 			testCases.seekg(1, ios::cur);
 			getline(testCases, message);
 			//CHECK((checkNumberOfArguments(argumQuantity) == "Успешно"));
-			cout << a << ' ' << b << ' ' << c << endl;
+			//cout << a << ' ' << b << ' ' << c << endl;
+			if (definitionType(a, b, c) == message)
+			{
+				result << "Successfull" << endl;
+			}
+			else
+			{
+				result << "Error" << endl;
+			}
 			CHECK((definitionType(a, b, c) == message));
 		}
 	}
