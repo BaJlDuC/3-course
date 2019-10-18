@@ -1,6 +1,7 @@
 ﻿//Visual Studio 17, Садовин Владислав
 //В автомате Мура, если у какой либо вершины отсутствует у, то писать у-
 #include "pch.h"
+#include "vizualization.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -11,6 +12,8 @@ using namespace std;
 
 const string MOORE_VERTEX_CHAR = "q";
 const string MEALY_VERTEX_CHAR = "Z";
+const string MOORE_AUTOMAT = "moore";
+const string MEALY_AUTOMAT = "mealy";
 
 int main(int argc, char* argv[])
 {
@@ -40,7 +43,7 @@ int main(int argc, char* argv[])
 
 	map<string, string> states;
 
-	if (automat == "moore")
+	if (automat == MOORE_AUTOMAT)
 	{
 		cout << "automat: moore" << endl; //добавляем вершины без выходных символов
 		for (int i = 0; i < vertexCount; i++)
@@ -69,10 +72,9 @@ int main(int argc, char* argv[])
 			outputAutomat << endl;
 		}
 	}
-	else if ("mealy")
+	else if (automat == MEALY_AUTOMAT)
 	{
 		vector<string> vertexes;
-		//vector<string> vertexes_x2;
 		cout << "automat: mealy" << endl;
 		for (int i = 0; i < inputCharsCount; i++) //заполняем таблицу c исходными состояниями (Мили)
 		{
@@ -132,10 +134,11 @@ int main(int argc, char* argv[])
 					outputAutomat << states[vertexes.at(index + vertexCount * (i - 1))] << ' ';
 					it++;
 				}
-	
 			}
 			outputAutomat << endl;
 		}
+		MooreMachine mooreMachine;
+		CreateMooreGraph(mooreMachine, states);
 	}
 	else
 	{
