@@ -1,0 +1,24 @@
+index.html
+HTTP/1.1 200 OK; Date: Wed, 30 Oct 2019 15:58:49 GMT
+
+about.html
+HTTP/1.1 200 OK; Date: Wed, 30 Oct 2019 15:58:49 GMT
+
+work.html
+HTTP/1.1 200 OK; Date: Wed, 30 Oct 2019 15:58:49 GMT
+
+pricing.html
+HTTP/1.1 200 OK; Date: Wed, 30 Oct 2019 15:58:49 GMT
+
+blog.html
+HTTP/1.1 200 OK; Date: Wed, 30 Oct 2019 15:58:49 GMT
+
+contact.html
+HTTP/1.1 200 OK; Date: Wed, 30 Oct 2019 15:58:49 GMT
+
+blog-single.html
+HTTP/1.1 200 OK; Date: Wed, 30 Oct 2019 15:58:49 GMT
+
+https://colorlib.com
+; 
+
