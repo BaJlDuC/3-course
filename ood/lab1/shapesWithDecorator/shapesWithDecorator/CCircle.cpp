@@ -5,6 +5,7 @@ using namespace std;
 
 CCircle::CCircle(sf::CircleShape circle)
 {
+	circleShape = circle;
 	radius.push_back(circle.getRadius());
 }
 
@@ -23,7 +24,21 @@ vector<int> CCircle::GetSize() const
 	return radius;
 }
 
-void CCircle::SetTrianglePoint(struct Point& point1, struct Point& point2, struct Point& point3) const
+void CCircle::DrawShape(sf::RenderWindow &window) const
 {
-	return;
+	window.draw(circleShape);
 }
+
+//unique_ptr<sf::CircleShape> CCircle::GetSfmlShape() const
+//{
+//	return circleShape;
+//}
+//vector<int> CCircle::GetSize() const
+//{
+//	return radius;
+//}
+//
+//void CCircle::SetTrianglePoint(struct Point& point1, struct Point& point2, struct Point& point3) const
+//{
+//	return;
+//}

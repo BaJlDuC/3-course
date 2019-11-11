@@ -4,8 +4,8 @@
 #include "CCircle.h"
 #include "CRectangle.h"
 #include "CTriangle.h"
-#include "CPerimeterCalculation.h"
-#include "CSquareCalculation.h"
+#include "CPerimeterDecorator.h"
+#include "CSquareDecorator.h"
 
 using namespace std;
 
@@ -13,182 +13,102 @@ const string RECTANGLE = "RECTANGLE:";
 const string CIRCLE = "CIRCLE:";
 const string TRIANGLE = "TRIANGLE:";
 
-struct Rectangle
+void rectangleHandler(ifstream &inputFile, ofstream &outputFile, sf::RenderWindow &window)
 {
-	Point point1, point2;
-};
+	string point1 = "", point2 = "";
+	vector<string> stream;
 
-struct Circle
-{
-	Point center;
-	int radius;
-};
+	inputFile >> point1 >> point2;
+	float x1 = stoi(point1.substr(3));
+	float y1 = stoi(point1.substr(7));
+	float x2 = stoi(point2.substr(3));
+	float y2 = stoi(point2.substr(7));
+	float height = abs(x2 - x1);
+	float width = abs(y2 - y1);
+	float centerX = height / 2;
+	float centerY = width / 2;
 
-struct Triangle
-{
-	Point point1, point2, point3;
-};
+	sf::RectangleShape rectangleShape({ height, width });
+	rectangleShape.setPosition({ centerX, centerY });
 
-void rectangleHandler(ifstream& inputFile, ofstream& outputFile)
-{
-	Rectangle rectangleStruct;
-	string point;
-
-	inputFile >> point;
-	for (int i = 0; i < point.size(); i++)
-	{
-		if (point[i] == '=')
-		{
-			rectangleStruct.point1.x = stoi(point.substr(i + 1));
-		}
-		else if (point[i] == ',')
-		{
-
-			rectangleStruct.point1.y = stoi(point.substr(i + 1));
-		}
-	}
-
-	inputFile >> point;
-	for (int i = 0; i < point.size(); i++)
-	{
-		if (point[i] == '=')
-		{
-			rectangleStruct.point2.x = stoi(point.substr(i + 1));
-		}
-		else if (point[i] == ',')
-		{
-
-			rectangleStruct.point2.y = stoi(point.substr(i + 1));
-		}
-	}
-	int side1 = rectangleStruct.point2.x - rectangleStruct.point1.x;
-	int side2 = rectangleStruct.point2.y - rectangleStruct.point1.y;
-
-	float side1f = (int)side1;
-	float side2f = (int)side2;
-
-	CSquareCalculation rectangle(new CPerimeterCalculation(new CRectangle(sf::RectangleShape({ side1f, side2f }))));
-
-	vector<string> output;
-	rectangle.PrintInfo(output);
-	for (vector<string>::reverse_iterator it = output.rbegin(); it != output.rend(); it++)
+	IShape *rectangle = new CPerimeterDecorator(new CSquareDecorator(new CRectangle(rectangleShape)));
+	rectangle->PrintInfo(stream);
+	rectangle->DrawShape(window);
+	for (vector<string>::iterator it = stream.begin(); it != stream.end(); it++)
 	{
 		outputFile << *it;
 	}
 	outputFile << endl;
 }
 
-void triangleHandler(ifstream& inputFile, ofstream& outputFile)
+void triangleHandler(ifstream &inputFile, ofstream  &outputFile, sf::RenderWindow &window)
 {
-	Triangle triangleStruct;
-	string point;
+	string point1 = "", point2 = "", point3 = "";
+	vector<string> stream;
 
-	inputFile >> point;
-	for (int i = 0; i < point.size(); i++)
-	{
-		if (point[i] == '=')
-		{
-			triangleStruct.point1.x = stoi(point.substr(i + 1));
-		}
-		else if (point[i] == ',')
-		{
+	inputFile >> point1 >> point2 >> point3;
+	float x1 = stoi(point1.substr(3));
+	float y1 = stoi(point1.substr(7));
+	float x2 = stoi(point2.substr(3));
+	float y2 = stoi(point2.substr(7));
+	float x3 = stoi(point3.substr(3));
+	float y3 = stoi(point3.substr(7));
 
-			triangleStruct.point1.y = stoi(point.substr(i + 1));
-		}
-	}
+	sf::ConvexShape triangleShape(3);
+	triangleShape.setPoint(0, { x1, y1 });
+	triangleShape.setPoint(1, { x2, y2 });
+	triangleShape.setPoint(2, { x3, y3 });
 
-	inputFile >> point;
-	for (int i = 0; i < point.size(); i++)
-	{
-		if (point[i] == '=')
-		{
-			triangleStruct.point2.x = stoi(point.substr(i + 1));
-		}
-		else if (point[i] == ',')
-		{
-
-			triangleStruct.point2.y = stoi(point.substr(i + 1));
-		}
-	}
-
-	inputFile >> point;
-	for (int i = 0; i < point.size(); i++)
-	{
-		if (point[i] == '=')
-		{
-			triangleStruct.point3.x = stoi(point.substr(i + 1));
-		}
-		else if (point[i] == ',')
-		{
-
-			triangleStruct.point3.y = stoi(point.substr(i + 1));
-		}
-	}
-
-	CSquareCalculation triangle(new CPerimeterCalculation(new CTriangle(sf::ConvexShape(3))));
-	triangle.SetTrianglePoint(triangleStruct.point1, triangleStruct.point2, triangleStruct.point3);
-
-	vector<string> output;
-	triangle.PrintInfo(output);
-
-	for (vector<string>::reverse_iterator it = output.rbegin(); it != output.rend(); it++)
+	IShape *triangle = new CPerimeterDecorator(new CSquareDecorator(new CTriangle(triangleShape)));
+	triangle->PrintInfo(stream);
+	triangle->DrawShape(window);
+	for (vector<string>::iterator it = stream.begin(); it != stream.end(); it++)
 	{
 		outputFile << *it;
 	}
 	outputFile << endl;
 }
 
-void circleHandler(ifstream& inputFile, ofstream& outputFile)
+void circleHandler(ifstream &inputFile, ofstream &outputFile, sf::RenderWindow &window)
 {
-	Circle circleStruct;
-	string point;
+	string center = "", radius = "";
+	vector <string> stream;
 
-	inputFile >> point;
-	//circleStruct.center = point;
-	inputFile >> point;
+	inputFile >> center >> radius;
+	float x1 = stoi(center.substr(2));
+	float y1 = stoi(center.substr(6));
+	int r = stoi(radius.substr(2));
 
-	for (int i = 0; i < point.size(); i++)
-	{
-		if (point[i] == '=')
-		{
-			circleStruct.radius = stoi(point.substr(i + 1));
-		}
-	}
+	sf::CircleShape circleShape(r);
+	circleShape.setPosition({ x1, y1 });
 
-	CSquareCalculation circle(new CPerimeterCalculation(new CCircle(sf::CircleShape(circleStruct.radius))));
-	vector<string> output;
-	circle.PrintInfo(output);
-	
-	for (vector<string>::reverse_iterator it = output.rbegin(); it != output.rend(); it++)
+	IShape *circle = new CPerimeterDecorator(new CSquareDecorator(new CCircle(circleShape)));
+    circle->PrintInfo(stream);
+	circle->DrawShape(window);
+	for (vector<string>::iterator it = stream.begin(); it != stream.end(); it++)
 	{
 		outputFile << *it;
 	}
 	outputFile << endl;
 }
 
-void dataHandler(ifstream& inputFile, ofstream& outputFile)
+void dataHandler(ifstream& inputFile, ofstream& outputFile, sf::RenderWindow &window)
 {
-	if (!inputFile)
-	{
-		cout << "Input file not found" << endl;
-		return;
-	}
-
-	string point, shapeType;
+	string shapeType = "";
 	while (!inputFile.eof())
 	{
 		inputFile >> shapeType;
 		if (shapeType == RECTANGLE)
 		{
-			rectangleHandler(inputFile, outputFile);
+			rectangleHandler(inputFile, outputFile, window);
 		}
 		else if (shapeType == CIRCLE)
 		{
-			circleHandler(inputFile, outputFile);
+			circleHandler(inputFile, outputFile, window);
 		}
 		else if (shapeType == TRIANGLE)
 		{
-			triangleHandler(inputFile, outputFile);
+			triangleHandler(inputFile, outputFile, window);
 		}
 		else
 		{

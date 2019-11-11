@@ -5,6 +5,8 @@ using namespace std;
 
 CRectangle::CRectangle(sf::RectangleShape rectangle)
 {
+	rectangleShape = rectangle;
+
 	size.push_back(rectangle.getSize().x);
 	size.push_back(rectangle.getSize().y);
 }
@@ -24,7 +26,17 @@ vector<int> CRectangle::GetSize() const
 	return size;
 }
 
-void CRectangle::SetTrianglePoint(struct Point& point1, struct Point& point2, struct Point& point3) const
+void CRectangle::DrawShape(sf::RenderWindow &window) const
 {
-	return;
+	window.draw(rectangleShape);
 }
+
+//vector<int> CRectangle::GetSize() const
+//{
+//	return size;
+//}
+//
+//void CRectangle::SetTrianglePoint(struct Point& point1, struct Point& point2, struct Point& point3) const
+//{
+//	return;
+//}
