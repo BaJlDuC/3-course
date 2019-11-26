@@ -1,19 +1,19 @@
 #pragma once
-#include "IShape.h"
+#include "SFMLDecorator.h"
 #include <SFML/Graphics.hpp>
 
 using namespace std;
 
-class CTriangle : public IShape
+class CTriangle : public SFMLDecorator
 {
-	//unique_ptr<sf::ConvexShape> triangleShape;
-	sf::ConvexShape triangleShape;
 protected:
-	vector<int> size;
+	vector<float> point1, point2, point3;
+    int side1, side2, side3;
+	string name = "TRIANGLE:";
 public:
-	CTriangle(sf::ConvexShape triangle);
-	void PrintInfo(vector<string>& stream) const override;
-	string GetShapeType() const override;
-	vector<int> GetSize() const override;
-	void DrawShape(sf::RenderWindow &window) const override;
+	CTriangle(vector<float> &trianglePoint1, vector<float> &trianglePoint2, vector<float> &trianglePoint3);
+	
+	double GetPerimeter() const override;
+	double GetSquare() const override;
+	string GetName() const override;
 };

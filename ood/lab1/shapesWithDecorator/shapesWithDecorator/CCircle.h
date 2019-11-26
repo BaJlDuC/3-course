@@ -1,20 +1,20 @@
 #pragma once
-#include "IShape.h"
+#include "SFMLDecorator.h"
 #include <SFML/Graphics.hpp>
 
 using namespace std;
 
-class CCircle : public IShape
+class CCircle : public SFMLDecorator
 {
-	//unique_ptr<sf::CircleShape> circleShape;
-	sf::CircleShape circleShape;
 protected:
-	vector<int> radius;
+	vector<float> center;
+	float rad;
+	string name = "CIRCLE:";
 public:
 
-	CCircle(sf::CircleShape circle);
-	void PrintInfo(vector<string>& stream) const override;
-	string GetShapeType() const override;
-	vector<int> GetSize() const override;
-	void DrawShape(sf::RenderWindow &window) const override;
+	CCircle(vector<float> &centerPoint, float &radius);
+
+	double GetPerimeter() const override;
+	double GetSquare() const override;
+	string GetName() const override;
 };

@@ -3,42 +3,28 @@
 
 using namespace std;
 
-CCircle::CCircle(sf::CircleShape circle)
+CCircle::CCircle(vector<float> &centerPoint, float &radius)
 {
-	circleShape = circle;
-	radius.push_back(circle.getRadius());
+	center = centerPoint;
+	rad = radius;
+
+	myShape = new sf::CircleShape(rad);
+	myShape->setPosition({ center.at(0), center.at(1) });
 }
 
-void CCircle::PrintInfo(vector<string>& stream) const
+double CCircle::GetPerimeter() const
 {
-	stream.push_back("CIRCLE:");
+	double perimeter = 2 * 3.14 * rad;
+	return perimeter;
 }
 
-string CCircle::GetShapeType() const
+double CCircle::GetSquare() const
 {
-	return "CIRCLE";
+	double square = 3.14 * rad * rad;
+	return square;
 }
 
-vector<int> CCircle::GetSize() const
+string CCircle::GetName() const
 {
-	return radius;
+	return name;
 }
-
-void CCircle::DrawShape(sf::RenderWindow &window) const
-{
-	window.draw(circleShape);
-}
-
-//unique_ptr<sf::CircleShape> CCircle::GetSfmlShape() const
-//{
-//	return circleShape;
-//}
-//vector<int> CCircle::GetSize() const
-//{
-//	return radius;
-//}
-//
-//void CCircle::SetTrianglePoint(struct Point& point1, struct Point& point2, struct Point& point3) const
-//{
-//	return;
-//}

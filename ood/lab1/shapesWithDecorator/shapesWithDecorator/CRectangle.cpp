@@ -3,40 +3,27 @@
 
 using namespace std;
 
-CRectangle::CRectangle(sf::RectangleShape rectangle)
+CRectangle::CRectangle(float &rectangleWidth, float &rectangleHeight, float &positionX, float &positionY)
 {
-	rectangleShape = rectangle;
+	width = rectangleWidth;
+	height = rectangleHeight;
 
-	size.push_back(rectangle.getSize().x);
-	size.push_back(rectangle.getSize().y);
+	myShape = new sf::RectangleShape({ width, height });
+	myShape->setPosition({ positionX, positionY });
 }
 
-void CRectangle::PrintInfo(vector<string>& stream) const
+double CRectangle::GetPerimeter() const
 {
-	stream.push_back("RECTANGLE:");
+	double perimeter = (width + height) * 2;
+	return perimeter;
+}
+double CRectangle::GetSquare() const
+{
+	double square = width * height;
+	return square;
 }
 
-string CRectangle::GetShapeType() const
+string CRectangle::GetName() const
 {
-	return "RECTANGLE";
+	return name;
 }
-
-vector<int> CRectangle::GetSize() const
-{
-	return size;
-}
-
-void CRectangle::DrawShape(sf::RenderWindow &window) const
-{
-	window.draw(rectangleShape);
-}
-
-//vector<int> CRectangle::GetSize() const
-//{
-//	return size;
-//}
-//
-//void CRectangle::SetTrianglePoint(struct Point& point1, struct Point& point2, struct Point& point3) const
-//{
-//	return;
-//}

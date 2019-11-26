@@ -3,59 +3,42 @@
 
 using namespace std;
 
-CTriangle::CTriangle(sf::ConvexShape triangle)
+CTriangle::CTriangle(vector<float> &trianglePoint1, vector<float> &trianglePoint2, vector<float> &trianglePoint3)
 {
-	triangleShape = triangle;
+	float x = trianglePoint2.at(0) - trianglePoint1.at(0);
+	float y = trianglePoint2.at(1) - trianglePoint1.at(1);
+	side1 = sqrt(pow(x, 2) + pow(y, 2));
 
-	int x = triangle.getPoint(1).x - triangle.getPoint(0).x;
-	int y = triangle.getPoint(1).y - triangle.getPoint(0).y;
-	int side1 = sqrt(pow(x, 2) + pow(y, 2));
+    x = trianglePoint3.at(0) - trianglePoint2.at(0);
+    y = trianglePoint3.at(1) - trianglePoint2.at(1);
+	side2 = sqrt(pow(x, 2) + pow(y, 2));
 
-    x = triangle.getPoint(2).x - triangle.getPoint(1).x;
-    y = triangle.getPoint(2).y - triangle.getPoint(1).y;
-	int side2 = sqrt(pow(x, 2) + pow(y, 2));
+	x = trianglePoint3.at(0) - trianglePoint1.at(0);
+	y = trianglePoint3.at(1) - trianglePoint1.at(1);
+	side3 = sqrt(pow(x, 2) + pow(y, 2));
 
-	x = triangle.getPoint(2).x - triangle.getPoint(0).x;
-	y = triangle.getPoint(2).y - triangle.getPoint(0).y;
-	int side3 = sqrt(pow(x, 2) + pow(y, 2));
+	sf::ConvexShape* triangle = new sf::ConvexShape();
+	triangle->setPointCount(3);
+	triangle->setPoint(0, { trianglePoint1.at(0), trianglePoint1.at(1) });
+	triangle->setPoint(1, { trianglePoint2.at(0), trianglePoint2.at(1) });
+	triangle->setPoint(2, { trianglePoint3.at(0), trianglePoint3.at(1) });
 	
-	size.push_back(side1);
-	size.push_back(side2);
-	size.push_back(side3);
+	myShape = triangle;
 }
 
-void CTriangle::PrintInfo(vector<string>& stream) const
+double CTriangle::GetPerimeter() const
 {
-	stream.push_back("TRIANGLE:");
+	double perimeter = side1 + side2 + side3;
+	return perimeter;
 }
-
-string CTriangle::GetShapeType() const
+double CTriangle::GetSquare() const
 {
-	return "TRIANGLE";
+	int p = (side1 + side2 + side3) / 2;
+	double square = sqrt(p * (p - side1) * (p - side2) * (p - side3));
+	return square;
 }
 
-vector<int> CTriangle::GetSize() const
+string CTriangle::GetName() const
 {
-	return size;
+	return name;
 }
-
-void CTriangle::DrawShape(sf::RenderWindow &window) const
-{
-	window.draw(triangleShape);
-}
-
-//vector<int> CTriangle::GetSize() const
-//{
-//	return size;
-//}
-//
-//void CTriangle::SetTrianglePoint(struct Point& point1, struct Point& point2, struct Point& point3) const
-//{
-//	int side1 = sqrt(pow((point2.x, -point1.x), 2) + pow((point2.y - point1.y), 2));
-//	int side2 = sqrt(pow((point3.x, -point2.x), 2) + pow((point3.y - point2.y), 2));
-//	int side3 = sqrt(pow((point3.x, -point1.x), 2) + pow((point3.y - point1.y), 2));
-//	sizePtr->push_back(side1);
-//	sizePtr->push_back(side2);
-//	sizePtr->push_back(side3);
-//	//cout << size.at(0) << ' ' << size.at(1) << ' ' << size.at(2) << endl;
-//}
