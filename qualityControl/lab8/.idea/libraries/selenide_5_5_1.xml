@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="selenide-5.5.1">
+    <CLASSES>
+      <root url="jar://C:/ForJava/selenide-5.5.1.jar!/" />
+      <root url="jar://C:/ForJava/selenium-server-standalone-3.141.59.jar!/" />
+      <root url="jar://C:/ForJava/slf4j.jar!/" />
+      <root url="jar://C:/ForJava/logback.jar!/" />
+      <root url="jar://C:/ForJava/commons-codec-1.10.jar!/" />
+      <root url="jar://C:/ForJava/commons-logging-1.2.jar!/" />
+      <root url="jar://C:/ForJava/httpclient-4.5.6.jar!/" />
+      <root url="jar://C:/ForJava/httpcore-4.4.10.jar!/" />
+      <root url="jar://C:/ForJava/commons-lang3-3.1.jar!/" />
+      <root url="jar://C:/ForJava/webdrivermanager-3.7.1.jar!/" />
+      <root url="jar://C:/ForJava/commons-io-2.4.jar!/" />
+      <root url="jar://C:/ForJava/gson-2.2.2.jar!/" />
+      <root url="jar://C:/ForJava/jsoup-1.6.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
