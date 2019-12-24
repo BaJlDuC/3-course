@@ -10,6 +10,7 @@ using namespace std;
 const string RECTANGLE = "RECTANGLE:";
 const string CIRCLE = "CIRCLE:";
 const string TRIANGLE = "TRIANGLE:";
+const string UNKNOWN_FIGURE = "Unknown figure";
 
 void rectangleHandler(ifstream &inputFile, vector<SFMLDecorator*> &shapes)
 {
@@ -83,7 +84,7 @@ void dataHandler(ifstream& inputFile, vector<SFMLDecorator*> &shapes)
 		}
 		else
 		{
-			cout << "Unknown figure" << endl;
+			cout << UNKNOWN_FIGURE << endl;
 			return;
 		}
 	}
