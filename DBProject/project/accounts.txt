@@ -1,0 +1,15 @@
+boris75	      hard_password
+alexander70	  easy_password
+oleg71	      password1
+vitali72	  password2
+grigori73	  password3
+evgeni74	  password4
+pavel76	      password5
+
+1	Борис	Семенов	Иванович
+2	Александр	Павлов	Степанович
+3	Олег	Ярославлев	Владимирович
+4	Виталий	Заваров	Витальевич
+5	Григорий	Артемьев	Евгеньевич
+6	Евгений	Лаптев	Сергеевич
+7	Павел	Резцов	Васильевич

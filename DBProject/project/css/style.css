@@ -1,0 +1,31 @@
+
+.top
+{
+    width: auto;
+    height: 60px;
+    text-align: center;
+    background-color: darkgrey;
+    font-family: 'Roboto', sans-serif;
+}
+
+.login
+{
+    text-align: right;
+    margin-top: -40px;
+    margin-right: 10px;
+}
+
+.toMain
+{
+    height: 120px;
+    position: fixed;
+}
+
+.lk
+{
+    width: auto;
+    height: 60px;
+    text-align: center;
+    background-color: darkgrey;
+}
+
