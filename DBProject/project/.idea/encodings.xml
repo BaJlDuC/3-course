@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/content.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/index.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/pages/lk/lk.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/pages/loginPage/loginPage.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pages/loginPage/name.txt" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/top.php" charset="windows-1251" />
+  </component>
+</project>
