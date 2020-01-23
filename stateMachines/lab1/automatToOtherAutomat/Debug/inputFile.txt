@@ -1,6 +1,6 @@
 2
 2
-3
+5
 mealy
-q3y1 q1y1 q1y2
-q1y1 q3y2 q2y1
+q0y0 q0y0 q4y1 q1y1 q0y0
+q1y1 q2y0 q3y0 q2y0 q3y0
