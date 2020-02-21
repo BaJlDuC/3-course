@@ -67,24 +67,26 @@ void CreateMooreGraph(MooreMachine& mooreMachine, map<string, string> &automatSt
 
 }
 
-void CreateMealyGraph(MealyMachine& mealyMachine, map<string, string> &automatStates)
+void CreateMealyGraph(MealyMachine& mealyMachine)
 {
 	Graph graph;
 	vector<Graph::vertex_descriptor> vertices;
-	map<string, string>::iterator it = automatStates.begin();
-	for (size_t i = 0; i < mealyMachine.graph[0].size(); ++i)
+	//map<string, string>::iterator it = automatStates.begin();
+	for (size_t i = 0; i < mealyMachine.graph[0].size() - 1; ++i)
 	{
-		string vertexLabel = "q" + to_string(i);// +mooreMachine.outputs[i];
-		map<string, string>::iterator it = automatStates.find(vertexLabel);
+		string vertexLabel = "A" + to_string(i);// +mooreMachine.outputs[i];
+		//map<string, string>::iterator it = automatStates.find(vertexLabel);
 		vertices.push_back(boost::add_vertex({ vertexLabel }, graph));
 	}
 
-	for (size_t i = 0; i < mealyMachine.graph.size(); ++i)
+	for (size_t i = 1; i < mealyMachine.graph[0].size(); i++)
 	{
-		for (size_t j = 0; j < mealyMachine.graph[0].size(); ++j)
+		cout << "TO PRINT" << endl;
+		for (size_t j = 0; j < mealyMachine.graph.size(); j++)
 		{
-			string edgeLabel = 'x' + to_string(i + 1) + "/" + mealyMachine.graph[i][j].substr(2, 3);
-			boost::add_edge(vertices[j], vertices[stoi(mealyMachine.graph[i][j].substr(1, 1))], { edgeLabel }, graph);
+			cout << "FOR PRINT" << endl;
+			string edgeLabel = 'x' + to_string(i - 1) + "/" + mealyMachine.graph[j][i].substr(2);
+			boost::add_edge(vertices[j], vertices[stoi(mealyMachine.graph[j][i].substr(1, 1))], { edgeLabel }, graph);
 		}
 	}
 

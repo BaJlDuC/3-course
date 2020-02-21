@@ -198,6 +198,7 @@ int main(int argc, char* argv[])
 				}
 			}
 			mealyAutomat.sumClasses = mealyAutomat.classes.size();
+			
 			//----------------------------------------разбиение на классы до последнего
 			bool done = false;
 			//classCount = 1;
@@ -365,6 +366,9 @@ int main(int argc, char* argv[])
 				}
 				outputFile << endl;
 			}
+			MealyMachine mealyMachine;
+			mealyMachine.graph = mealyAutomat.finalOutput;
+			CreateMealyGraph(mealyMachine);
 			//========================================================================================= ниже просто вывод
 			map<string, vector<vector<string>>>::iterator iterForOut = mealyAutomat.classes.begin();
 			for (int i = 0; iterForOut != mealyAutomat.classes.end(); i++, iterForOut++)
