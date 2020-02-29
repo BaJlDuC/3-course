@@ -14,7 +14,7 @@ struct MooreMachine
 {
 	vector<int> inputs; 
 	vector<string> outputs;
-	vector<vector<int>> graph; 
+	vector<vector<string>> graph; 
 };
 
 struct MealyMachine
@@ -35,26 +35,22 @@ struct EdgeProps
 
 using Graph = boost::adjacency_list<boost::vecS, boost::vecS, boost::directedS, VertexProps, EdgeProps>;
 
-void CreateMooreGraph(MooreMachine& mooreMachine, map<string, string> &automatStates)
+void CreateMooreGraph(MooreMachine& mooreMachine)
 {
 	Graph graph;
 	vector<Graph::vertex_descriptor> vertices;
-	map<string, string>::iterator it = automatStates.begin();
-	for (size_t i = 0; i < mooreMachine.graph[0].size(); ++i)
+	for (size_t i = 0; i < mooreMachine.graph.size(); i++)
 	{
-		string vertexLabel = 'q' + to_string(mooreMachine.inputs.at(i)) + mooreMachine.outputs[i];
-		map<string, string>::iterator it = automatStates.find(vertexLabel);
-		//vertexLabel += '-' + it->second;
-		vertexLabel = it->second + (mooreMachine.outputs[i]);
+		string vertexLabel = "A" + to_string(i) + mooreMachine.graph.at(i).at(1);
 		vertices.push_back(boost::add_vertex({ vertexLabel }, graph));
 	}
-
-	for (size_t i = 0; i < mooreMachine.graph.size(); ++i)
+	vertices;
+	for (size_t i = 0; i < mooreMachine.graph.size(); i++)
 	{
-		for (size_t j = 0; j < mooreMachine.graph[0].size(); ++j)
+		for (size_t j = 2; j < mooreMachine.graph.at(0).size(); j++)
 		{
-			string edgeLabel = 'x' + to_string(i + 1);
-			boost::add_edge(vertices[j], vertices[mooreMachine.graph[i][j]], { edgeLabel }, graph);
+			string edgeLabel = 'x' + to_string(j - 1);
+			boost::add_edge(vertices[i], vertices[stoi(mooreMachine.graph[i][j].substr(1, 1))], { edgeLabel }, graph);
 		}
 	}
 
@@ -81,7 +77,7 @@ void CreateMealyGraph(MealyMachine& mealyMachine)
 	{
 		for (size_t j = 0; j < mealyMachine.graph.size(); j++)
 		{
-			string edgeLabel = 'x' + to_string(i - 1) + "/" + mealyMachine.graph[j][i].substr(2);
+			string edgeLabel = 'x' + to_string(i) + "/" + mealyMachine.graph[j][i].substr(2);
 			boost::add_edge(vertices[j], vertices[stoi(mealyMachine.graph[j][i].substr(1, 1))], { edgeLabel }, graph);
 		}
 	}

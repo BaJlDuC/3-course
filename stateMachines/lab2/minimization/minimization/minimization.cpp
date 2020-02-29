@@ -12,7 +12,6 @@
 
 using namespace std;
 
-
 int main(int argc, char* argv[])
 {
 	if (argc != 3)
@@ -37,7 +36,7 @@ int main(int argc, char* argv[])
 	}
 	else if (automat == "moore")
 	{
-		//doing something... later
+		mooreMachineHandler(inputFile, outputFile, inputAlphabetCount, vertexCount);
 	}
 	else
 	{
